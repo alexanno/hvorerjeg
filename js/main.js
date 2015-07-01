@@ -26,7 +26,7 @@ $(document).ready(function() {
 				"from stedsnavn.stedsnavn_alle " + 
 				"where objtype='SSRForekomst' "+
 				"order by wkb_geometry <-> "+gpsgeom + 
-				"limit 5";
+				"limit 7";
 			var url = "http://46.101.4.130/stedsnavn/getstedsnavn.php?sql="+query;
 			console.log(url);
 			$.get(url, function(data) {
@@ -38,7 +38,7 @@ $(document).ready(function() {
 					
 					//var stedsnavnUrl = "http://faktaark.statkart.no/SSRFakta/faktaarkfraobjektid?enhet=233181" + sted.ssrid;
 
-					var $stedsnavn = $("<h1>").html(sted.snavn + " <br>(" + (sted.avstand/1000).toFixed(2) + " km)");
+					var $stedsnavn = $("<h3>").html(sted.snavn + "  (" + (sted.avstand/1000).toFixed(2) + " km)");
 					$stedsnavnliste.append($stedsnavn);
 
 
@@ -70,8 +70,8 @@ $(document).ready(function() {
 	/*** GeoLocation */
     //trigger HTML5 GeoLocation via Leaflet
     Norkart.map.locate({
-        setView: true,
-        maxZoom: 17,
+        setView: false,
+        maxZoom: 15,
         enableHighAccuracy: true,
         watch: true
     });
@@ -90,7 +90,7 @@ $(document).ready(function() {
 
         //Lager en ny markør med koordinater (latlng) som fått igjennom "locationfound"-eventet
         Norkart.gpsMarker = L.marker(e.latlng)
-        	.bindLabel("Du er innenfor " + radius + " meter av dette punktet.", { noHide: true })
+        	//.bindLabel("Du er innenfor " + radius + " meter av dette punktet.", { noHide: true })
         	.addTo(Norkart.map);
 
         //lager en sirkel med senter i koordinaten og radius = nøyaktighet/2
