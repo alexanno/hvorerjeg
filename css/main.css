@@ -12,11 +12,21 @@
 }
 
 .leaflet-label {
-	font-size: 18px;
+	font-size: 16px;
 }
 
 .stedsnavnliste {
-	min-height: 200px;
+	min-height: 150px;
+}
+
+.stedsnavnliste h3 {
+	font-size: 14px;
+	margin-bottom: 0px;
+	margin-top: 0px;
+}
+.posisjon {
+	min-height: 20px;
+	font-size: 10px;
 }
 
 

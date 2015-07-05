@@ -40,7 +40,7 @@ $(document).ready(function() {
 
 					var $stedsnavn = $("<h3>").html(sted.snavn + "  (" + (sted.avstand/1000).toFixed(2) + " km)");
 					$stedsnavnliste.append($stedsnavn);
-
+					
 
 
 					var l = omnivore.wkt.parse(sted.wkt);
@@ -77,6 +77,7 @@ $(document).ready(function() {
     });
 
     //definerer funksjon som skal kjøres ved event nedenfor
+    var firstPosition = false;
     function onLocationFound(e) {
         var radius = e.accuracy / 2;
         console.log(e.latlng);
@@ -86,6 +87,11 @@ $(document).ready(function() {
         if (typeof Norkart.gpsMarker === 'object') {
             Norkart.map.removeLayer(Norkart.gpsMarker);
             Norkart.map.removeLayer(Norkart.gpsCircle);
+        }
+
+        if(firstPosition === false) {
+        	Norkart.map.setView(e.latlng, 15);
+        	firstPosition = true;
         }
 
         //Lager en ny markør med koordinater (latlng) som fått igjennom "locationfound"-eventet
